@@ -15,16 +15,28 @@ const LifeCycleFunction = ( props ) => {
   //   }
   // }, [ count ] )
 
-  useEffect( () => {
-    const handler = () => {
-      alert( 'um click na janela foi executado' )
-    }
-    window.addEventListener( 'click', handler )
+  // useEffect( () => {
+  //   const handler = () => {
+  //     alert( 'um click na janela foi executado' )
+  //   }
+  //   window.addEventListener( 'click', handler )
 
+  //   return () => {
+  //     window.removeEventListener( 'click', handler )
+  //   }
+  // }, [] )
+
+  useEffect( () => {
+    // Semelhante ao DidUpdate ou DidMount -> depois da renderização
+    console.log( `inicio do ciclo, o valor do contador é ${count}` )
+    alert( `inicio do ciclo, o valor do contador é ${count}` )
+
+    // Semelhante WillUnmount -> também é executado quando a dependencia é atualizada
     return () => {
-      window.removeEventListener( 'click', handler )
+      alert( `fim do ciclo, o valor do contador ainda é ${count}` )
+      console.log( `fim do ciclo, o valor do contador ainda é ${count}` )
     }
-  }, [] )
+  }, [ count ] )
 
   return (
     <div>
